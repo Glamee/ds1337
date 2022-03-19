@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление записи
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Добавление воспитанника в базу</h1>
+    <form method="post">
+        <br>Фамилия, имя, отчество: <input type="text" name="fio" id="fio" class="" maxlength="100" size="70"><br><br>
+        <div class="d-flex gap-5 justify-content-left">
+            <div class="list-group mx-0">
+                <label class="list-group-item d-flex gap-2">
+                    <input class="form-check-input flex-shrink-0" type="radio" name="group" id="group_type1" value="elder" checked="">
+                    <span>
+                        Старшая группа
+                    </span>
+                </label>
+                <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="radio" name="group" id="group_type2" value="junior">
+                    <span>
+                        Младшая группа
+                    </span>
+                </label>
+            </div>
+        </div> <br>
+        <table cellpadding = "6">
+        <tr><td>Дата зачисления в детский сад:</td><td><input type="date" name="date_z" id="date_z"><br></td></tr>
+        <tr><td>Дата прививки от коклюша:</td><td><input type="date" name="koklyush_date" id="koklyush_date"><br></td></tr>
+        <tr><td>Дата прививки от полиомелита:</td><td><input type="date" name="paliom_date" id="paliom_date"><br></td></tr>
+        <tr><td>Дата прививки от желтухи:</td><td><input type="date" name="zheltuha_date" id="zheltuha_date"><br></td></tr>
+        <tr><td>Дата прививки от туберкулеза:</td><td><input type="date" name="tuber_date" id="tuber_date"><br></td></tr>
+        </table><br>
+        <div class="d-flex gap-5 justify-content-left">
+            <div class="list-group mx-0">
+                <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" name="medotvod" id="medotvod">
+                    <span>
+                        Наличие медицинских противопоказаний
+                    </span>
+                </label>
+            </div>
+        </div> <br>
+        <input type="submit" class="btn btn-success" value="Создать">
+
+    </form>
+{% endblock %}

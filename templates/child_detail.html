@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Детальная информация
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>{{ child.fio }}</h1>
+    <div class="alert alert-info">
+        <h3>Дата зачисления в детский сад: {{ child.date_z }}</h3>
+        {% if child.group == 'elder' %}
+        {% if child.delta_date > 365 %} <font class="text-danger">Необходимо отчислить воспитанника из детского сада </font>{% endif %}
+        <p><b>Старшая группа</b></p>
+        {% else %}
+        {% if child.delta_date > 365 %} <font class="text-danger">Необходимо перевести воспитанника в старшую группу </font>{% endif %}
+        <p><b>Младшая группа</b></p> {% endif %}
+        {% if child.medotvod == 'on' %}
+            <p><font class="text-danger">У данного воспитанника медицинский отвод от прививок!</font></b></p>
+        {% else %}
+            <table cellpadding="6">
+            <tr><td><b>Дата вакцинации от коклюша:</b></td><td> <b>{{ child.koklyush_date }}</b></td>
+            {% if child.delta_koklyush_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
+            <tr><td><b>Дата вакцинации от полиомелита:  </b></td><td><b>{{ child.paliom_date }}</b></td>
+            {% if child.delta_paliom_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
+            <tr><td><b>Дата вакцинации от желтухи: </b></td><td><b>{{ child.zheltuha_date }}</b></td>
+            {% if child.delta_zheltuha_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
+            <tr><td><b>Дата вакцинации от туберкулеза: </b></td><td><b>{{ child.tuber_date }}</b></td>
+            {% if child.delta_tuber_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
+            </table>
+        {% endif %}
+        <br>
+        {% if child.group == 'junior' %}
+        <a href="/child/{{ child.id }}/transfer" class="btn btn-primary">Перевести в старшую группу</a>
+        {% endif %}
+        <a href="/child/{{ child.id }}/update" class="btn btn-success">Редактировать запись</a>
+        <a href="/child/{{ child.id }}/delete" class="btn btn-danger">Удалить запись</a>
+    </div>
+</div>
+{% endblock %}

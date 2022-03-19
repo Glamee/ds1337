@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Старшая группа
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Список воспитанников старшей группы</h1>
+
+    {% if children|length > 0 %}
+
+        {% for el in children %}
+            {% if el.group == 'elder' %}
+                <div class="alert alert-info">
+                    <h2>{{ el.fio }}</h2>
+                    <p><b>Дата зачисления: {{ el.date_z }}</b></p>
+                    {% if el.delta_date > 365 %}
+                        <p> <font class="text-danger">Необходимо отчислить воспитанника из детского сада! </p>
+                    {% endif %}
+                    {% if el.medotvod != 'on' %}
+                        {% if el.delta_koklyush_date > 365 or el.delta_paliom_date > 182 or el.delta_zheltuha_date > 120 or el.delta_tuber_date > 90 %}
+                            <p> <font class="text-danger">Проверьте карточку воспитанника, требуется вакцинация! </p>
+                        {% endif %}
+                    {% endif %}
+                    <a href="/child/{{ el.id }}" class="btn btn-warning">Детальнее</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+    <p>Записей ещё нет</p>
+    <a class="btn btn-warning" href="/create">Создать запись</a>
+    {% endif %}
+</div>
+{% endblock %}
