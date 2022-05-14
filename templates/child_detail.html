@@ -12,7 +12,7 @@
         <tr><td><h3>Дата зачисления в детский сад: {{ child.date_z }}</h3><td>
         {% if child.group == 'elder' %}
         {% if child.delta_date > 365 %} <font class="text-danger">Необходимо отчислить воспитанника из детского сада </font>{% endif %}
-        <td><p><b>Старшая группа</b></p></td>
+        <td align="right" width="650"><p><h3>Младшая группа</h3></p></td></tr></table>
         {% else %}
         <td align="right" width="650"><p><h3>Младшая группа</h3></p></td></tr></table>
         {% if child.delta_date > 365 %} <font class="text-danger">Необходимо перевести воспитанника в старшую группу </font>{% endif %}{% endif %}
