@@ -1,7 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date
-from dateutil import parser
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///children.db'
@@ -50,7 +49,7 @@ def update():
 def index():
     count = Child.query.count()
     children = Child.query.all()
-    #update()
+    update()
     return render_template("index.html", count=count, children=children)
 
 @app.route('/create', methods=['POST', 'GET'])
@@ -59,18 +58,29 @@ def create_child():
         fio = request.form['fio']
         group = request.form['group']
         date_z = request.form['date_z']
+        if date_z == '':
+            return redirect("/error")
+        print(date_z)
         delta = date.today()-datetime.strptime(date_z, '%Y-%m-%d').date()
         delta_date = delta.days
-        koklyush_date = request.form['koklyush_date']
+        koklyush_date = request.form.get('koklyush_date')
+        if koklyush_date == '':
+            koklyush_date = '1999-01-01'
         delta = date.today()-datetime.strptime(koklyush_date, '%Y-%m-%d').date()
         delta_koklyush_date = delta.days
-        paliom_date = request.form['paliom_date']
+        paliom_date = request.form.get('paliom_date')
+        if paliom_date == '':
+            paliom_date = '1999-01-01'
         delta = date.today()-datetime.strptime(paliom_date, '%Y-%m-%d').date()
         delta_paliom_date = delta.days
-        zheltuha_date = request.form['zheltuha_date']
+        zheltuha_date = request.form.get('zheltuha_date')
+        if zheltuha_date == '':
+            zheltuha_date = '1999-01-01'
         delta = date.today()-datetime.strptime(zheltuha_date, '%Y-%m-%d').date()
         delta_zheltuha_date = delta.days
-        tuber_date = request.form['tuber_date']
+        tuber_date = request.form.get('tuber_date')
+        if tuber_date == '':
+            tuber_date = '1999-01-01'
         delta = date.today()-datetime.strptime(tuber_date, '%Y-%m-%d').date()
         delta_tuber_date = delta.days
         medotvod = request.form.get('medotvod', 'off')
@@ -164,6 +174,11 @@ def child_update(id):
             return "При редактировании записи произошла ошибка"
     else:
         return render_template("child_update.html", child=child)
+
+
+@app.route("/error")
+def error():
+    return render_template("/error.html")
 
 if __name__ == "__main__":
     app.run(debug = True)

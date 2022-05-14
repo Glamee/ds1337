@@ -14,9 +14,9 @@
             {% if el.group == 'junior' %}
                 <div class="alert alert-info">
                     <h2>{{ el.fio }}</h2>
-                    <p><b>Дата зачисления: {{ el.date_z }} </b></p>
+                    <p><b>Дата зачисления: </b>{{ el.date_z }} </p>
                    {% if el.delta_date > 365 %}
-                        <p> <font class="text-danger">Необходимо отчислить воспитанника из детского сада! </p>
+                        <p> <font class="text-danger">Необходимо перевести воспитанника в старшую группу! </p>
                     {% endif %}
                     {% if el.medotvod != 'on' %}
                         {% if el.delta_koklyush_date > 365 or el.delta_paliom_date > 182 or el.delta_zheltuha_date > 120 or el.delta_tuber_date > 90 %}

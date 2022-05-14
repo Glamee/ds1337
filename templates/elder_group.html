@@ -14,7 +14,7 @@
             {% if el.group == 'elder' %}
                 <div class="alert alert-info">
                     <h2>{{ el.fio }}</h2>
-                    <p><b>Дата зачисления: {{ el.date_z }}</b></p>
+                    <p><b>Дата зачисления:</b> {{ el.date_z }}</p>
                     {% if el.delta_date > 365 %}
                         <p> <font class="text-danger">Необходимо отчислить воспитанника из детского сада! </p>
                     {% endif %}

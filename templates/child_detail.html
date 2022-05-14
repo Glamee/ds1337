@@ -8,24 +8,26 @@
 <div class="container mt-5">
     <h1>{{ child.fio }}</h1>
     <div class="alert alert-info">
-        <h3>Дата зачисления в детский сад: {{ child.date_z }}</h3>
+        <table>
+        <tr><td><h3>Дата зачисления в детский сад: {{ child.date_z }}</h3><td>
         {% if child.group == 'elder' %}
         {% if child.delta_date > 365 %} <font class="text-danger">Необходимо отчислить воспитанника из детского сада </font>{% endif %}
-        <p><b>Старшая группа</b></p>
+        <td><p><b>Старшая группа</b></p></td>
         {% else %}
-        {% if child.delta_date > 365 %} <font class="text-danger">Необходимо перевести воспитанника в старшую группу </font>{% endif %}
-        <p><b>Младшая группа</b></p> {% endif %}
+        <td align="right" width="650"><p><h3>Младшая группа</h3></p></td></tr></table>
+        {% if child.delta_date > 365 %} <font class="text-danger">Необходимо перевести воспитанника в старшую группу </font>{% endif %}{% endif %}
+
         {% if child.medotvod == 'on' %}
             <p><font class="text-danger">У данного воспитанника медицинский отвод от прививок!</font></b></p>
         {% else %}
             <table cellpadding="6">
-            <tr><td><b>Дата вакцинации от коклюша:</b></td><td> <b>{{ child.koklyush_date }}</b></td>
+            <tr><td><b>Дата вакцинации от коклюша:</b></td><td>{{ child.koklyush_date }}</td>
             {% if child.delta_koklyush_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
-            <tr><td><b>Дата вакцинации от полиомелита:  </b></td><td><b>{{ child.paliom_date }}</b></td>
+            <tr><td><b>Дата вакцинации от полиомелита:  </b></td><td>{{ child.paliom_date }}</td>
             {% if child.delta_paliom_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
-            <tr><td><b>Дата вакцинации от желтухи: </b></td><td><b>{{ child.zheltuha_date }}</b></td>
+            <tr><td><b>Дата вакцинации от желтухи: </b></td><td>{{ child.zheltuha_date }}</td>
             {% if child.delta_zheltuha_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
-            <tr><td><b>Дата вакцинации от туберкулеза: </b></td><td><b>{{ child.tuber_date }}</b></td>
+            <tr><td><b>Дата вакцинации от туберкулеза: </b></td><td>    {{ child.tuber_date }}</td>
             {% if child.delta_tuber_date > 365 %} <td><b><font class="text-danger">Необходима вакцинация!</font></b></td>{%endif%}</tr>
             </table>
         {% endif %}

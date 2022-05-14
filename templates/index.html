@@ -7,14 +7,14 @@
 {% block body %}
 <div class="p-5 mb-3 bg-light rounded-3 container">
       <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Количество воспитанников детского сада: {{ count }}</h1>
+        <h2 class="display-6 fw-bold">Количество воспитанников детского сада: {{ count }}</h2>
         <p class="col-md-10 fs-4">На данном портале ведётся учёт воспитанников детского сада и их периодов вакцинации</p>
         <a class="btn btn-warning" href="/create">Создать запись</a>
       </div>
 </div>
-<div class="p-5 mb-4 bg-light rounded-3 container">
+<div class="p-5 mb-4 bg-light rounded-7 container">
       <div class="container-fluid py-5">
-      <p class="col-md-10 fs-4"><b>Воспитанники, которых необходимо перевести в старшую группу или отчислить</b></p>
+      <p class="col-md-10 fs-4"><b>Воспитанники, которых необходимо перевести в старшую группу или отчислить:</b></p>
       {% for i in children %}
         {% if i.delta_date > 365 %}
            <p><a href="/child/{{ i.id }}" class="btn btn-danger" align="right">{{i.fio}}</a></p>
@@ -24,7 +24,7 @@
 </div>
 <div class="p-5 mb-4 bg-light rounded-3 container">
       <div class="container-fluid py-5">
-      <p class="col-md-8 fs-4"><b>Воспитанники, которым требуется вакцинация</b></p>
+      <p class="col-md-8 fs-4"><b>Воспитанники, которым требуется вакцинация:</b></p>
       {% for i in children %}
           {% if i.medotvod != 'on' %}
             {% if i.delta_koklyush_date > 365 or i.delta_paliom_date > 182 or i.delta_zheltuha_date > 120 or i.delta_tuber_date > 90 %}
@@ -32,11 +32,6 @@
             {% endif %}
           {% endif %}
       {% endfor %}
-      </div>
-</div>
-
-
-
       </div>
 </div>
 {% endblock %}
